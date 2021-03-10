@@ -6,17 +6,16 @@ public class Damage : MonoBehaviour
 {
 
     public float health = 50f;
-
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void TakeDamage(float amount)
@@ -24,7 +23,7 @@ public class Damage : MonoBehaviour
         health -= amount;
         if (health <= 0f)
         {
-            Die();
+            //Die();
         }
 
     }
@@ -33,4 +32,5 @@ public class Damage : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
 }
