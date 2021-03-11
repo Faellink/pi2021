@@ -59,14 +59,14 @@ public class PlayerController : MonoBehaviour
             onAir = true;
         }
 
-        if (onAir == true)
-        {
-            _speed = _airSpeed;
-        }
-        else
-        {
-            _speed = _airSpeed * 2f;
-        }
+        // if (onAir == true)
+        // {
+        //     _speed = _airSpeed;
+        // }
+        // else
+        // {
+        //     _speed = _airSpeed * 2f;
+        // }
 
         velocity.y += _gravity * Time.deltaTime;
 
