@@ -21,6 +21,10 @@ public class Shoot : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public GameObject hitEffect;
 
+    public Collider[] coliders;
+
+    public Vector3 explosionCenter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,29 +58,33 @@ public class Shoot : MonoBehaviour
 
         RaycastHit raycastHit;
         if(Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward , out raycastHit, range))
-        {
-            
+        {   
+            explosionCenter = raycastHit.point;
             //
             EnemyRagdoll enemy = raycastHit.transform.GetComponent<EnemyRagdoll>();
-            if(enemy != null){
-                //enemy.Die();
+            if (enemy != null)
+            {             
+               //enemy.Die();
                 enemy.enemyHealth -= this.damage;
-                if(enemy.enemyHealth <= 0f){
+                if (enemy.enemyHealth <= 0f)
+                {
                     enemy.Die();
-                    //
-                    // Collider[] colliders = Physics.OverlapSphere(raycastHit.point, explosionRadius);
-                    // foreach(Collider closeObjects in colliders){
-                    //     Rigidbody rigidbodyClose = closeObjects.GetComponent<Rigidbody>();
-                    //     if(rigidbodyClose != null){
-                    //         rigidbodyClose.AddExplosionForce(explosionForce, raycastHit.point, explosionRadius, 10f);
-                            
-                    //     }
-                    // }
-                    //
+                    Collider[] enemiesToAddForce = Physics.OverlapSphere(raycastHit.point, explosionRadius);
+                    foreach(Collider enemiesToRagdoll in enemiesToAddForce){
+                        Rigidbody ragdollRigid = enemiesToRagdoll.GetComponent<Rigidbody>();
+                        if(ragdollRigid != null){
+                            ragdollRigid.AddExplosionForce(explosionForce, raycastHit.point, explosionRadius);
+                        }
+
+                    }
+                    
                 }
             }
+            
+            
 
-            Debug.Log(raycastHit.transform.name);
+            //Debug.Log(raycastHit.transform.name);
+
             Damage damage = raycastHit.transform.GetComponent<Damage>();
             if (damage != null)
             {
@@ -99,6 +107,10 @@ public class Shoot : MonoBehaviour
     //     Instantiate(bulletPrefab, shooter.position, Quaternion.identity);
     // }
 
+    void OnDrawGizmos() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(explosionCenter, explosionRadius);
+    }
     
 
 }

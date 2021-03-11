@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 3
+  grenadeDamage: 110
   explosionRadius: 10
-  grenadeForce: 500
+  grenadeForce: 800
   explosionEffect: {fileID: 0}
