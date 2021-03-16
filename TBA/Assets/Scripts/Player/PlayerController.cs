@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     float _speed = 5f;
     float _airSpeed = 0;
     public float _gravity = -9.81f;
-    public float _jumpForce = 10f;
+    public float _jumpForce = 10f; 
 
     Vector3 velocity;
     public Transform groundCheck;

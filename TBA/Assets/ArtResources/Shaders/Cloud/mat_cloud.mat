@@ -39,7 +39,7 @@ Material:
     - Vector1_DB85C24D: 1.5
     - Vector1_F2113D60: 1855
     m_Colors:
-    - Color_1AB5F3EF: {r: 0.8726415, g: 0.8726415, b: 1, a: 0}
+    - Color_1AB5F3EF: {r: 0.8745098, g: 0.8745098, b: 1, a: 0}
     - Color_D23C8EF9: {r: 0, g: 0.68235296, b: 1, a: 0}
     - Vector4_973DA92B: {r: 0, g: 1, b: -1, a: 1}
     - Vector4_A472B6CF: {r: 1, g: 0, b: 0, a: 90}

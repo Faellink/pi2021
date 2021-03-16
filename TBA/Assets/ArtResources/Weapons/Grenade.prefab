@@ -132,5 +132,5 @@ MonoBehaviour:
   delay: 3
   grenadeDamage: 110
   explosionRadius: 10
-  grenadeForce: 800
+  grenadeForce: 100
   explosionEffect: {fileID: 0}
