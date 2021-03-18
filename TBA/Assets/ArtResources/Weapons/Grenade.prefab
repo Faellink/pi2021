@@ -133,4 +133,5 @@ MonoBehaviour:
   grenadeDamage: 110
   explosionRadius: 10
   grenadeForce: 100
-  explosionEffect: {fileID: 0}
+  explosionEffect: {fileID: 6773112444684631069, guid: 28c36edf5f423664e94fb4b3eec1056e,
+    type: 3}
