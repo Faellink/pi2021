@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 3003076645566537904}
   - component: {fileID: 3003076645566537905}
   m_Layer: 0
-  m_Name: Enemy Ragdol (3)
+  m_Name: Enemy Ragdol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -578,6 +578,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 100
+  floatingDamageText: {fileID: 6223299110245475392, guid: bfb06fed945d78e449119efe80fe8d39,
+    type: 3}
 --- !u!1 &2911879200201487456
 GameObject:
   m_ObjectHideFlags: 0

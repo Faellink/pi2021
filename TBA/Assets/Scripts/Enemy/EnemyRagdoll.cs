@@ -11,6 +11,8 @@ public class EnemyRagdoll : MonoBehaviour
     Animator animator;
     public float enemyHealth = 100f;
 
+    public GameObject floatingDamageText;
+
     void Start()
     {
         mainRigidbody = GetComponent<Rigidbody>();
@@ -47,5 +49,11 @@ public class EnemyRagdoll : MonoBehaviour
             col.enabled = state;
         }
         mainCollider.enabled = !state;
+    }
+    
+    public void ShowDamage(){
+        Instantiate(floatingDamageText, transform.position, Quaternion.identity, transform);
+        
+
     }
 }

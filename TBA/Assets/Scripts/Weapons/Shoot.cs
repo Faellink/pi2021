@@ -5,7 +5,9 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
 
-    public float damage = 10f;
+    public float shotdamage = 10f;
+    public int randomDamage;
+
     public float range = 100f;
     public float fireRate = 15f;
     public float  impactForce = 50f;
@@ -24,6 +26,7 @@ public class Shoot : MonoBehaviour
     public Collider[] coliders;
 
     public Vector3 explosionCenter;
+
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +68,21 @@ public class Shoot : MonoBehaviour
             if (enemy != null)
             {             
                //enemy.Die();
-                enemy.enemyHealth -= this.damage;
+                enemy.enemyHealth -= shotdamage;
+                // randomDamage = Random.Range(10, 26);
+                // enemy.enemyHealth -= randomDamage;
+                
+                //
+                
+
+                enemy.ShowDamage();
+
+                TextMesh[] enemyTexts  = enemy.GetComponentsInChildren<TextMesh>();
+
+                foreach(TextMesh enemyDamageText in enemyTexts){
+                    enemyDamageText.text = enemy.enemyHealth.ToString();
+                }
+
                 if (enemy.enemyHealth <= 0f)
                 {
                     enemy.Die();
@@ -88,7 +105,7 @@ public class Shoot : MonoBehaviour
             Damage damage = raycastHit.transform.GetComponent<Damage>();
             if (damage != null)
             {
-                damage.TakeDamage(this.damage);
+                damage.TakeDamage(shotdamage);
             }
 
             GameObject hitGO =  Instantiate(hitEffect, raycastHit.point, Quaternion.LookRotation(raycastHit.normal));
@@ -106,6 +123,8 @@ public class Shoot : MonoBehaviour
     // {
     //     Instantiate(bulletPrefab, shooter.position, Quaternion.identity);
     // }
+
+  
 
     void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
