@@ -12,7 +12,11 @@ public class Shoot : MonoBehaviour
     public float fireRate = 15f;
     public float  impactForce = 50f;
     float nextTimeToFire = 0f;
-    bool isShooting;
+    public bool isShooting;
+    public bool canShoot;
+
+    public float meleeDamage = 50f;
+    
 
     public float explosionForce = 500f;
     public float explosionRadius = 10f;
@@ -27,29 +31,43 @@ public class Shoot : MonoBehaviour
 
     public Vector3 explosionCenter;
 
+    public Animator weaponAnim;
+
 
     // Start is called before the first frame update
     void Start()
     {
         fpsCamera = Camera.main;
+        weaponAnim = GetComponent<Animator>();
+        weaponAnim.SetBool("isMelee", false);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
         if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             ShootWeapon();
+            isShooting = true;
             muzzleFlash.Play();
 
         }
 
+
+
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             muzzleFlash.Stop();
+            isShooting = false;
         }
-        
+
+        WeaponMelee();
+
+        WeaponAnimation();
+
     }
 
     void ShootWeapon()
@@ -124,7 +142,26 @@ public class Shoot : MonoBehaviour
     //     Instantiate(bulletPrefab, shooter.position, Quaternion.identity);
     // }
 
-  
+    void WeaponMelee(){
+        
+        if(Input.GetKeyDown(KeyCode.F)){
+        weaponAnim.Play("Melee");
+        }
+
+    }
+
+    void WeaponAnimation(){
+
+        if (weaponAnim.GetCurrentAnimatorStateInfo(0).IsName("Melee"))
+        {
+            //Debug.Log(weaponAnim.GetCurrentAnimatorStateInfo(0).IsName("Melee"));
+            canShoot = false;
+        }else{
+            canShoot= true;
+        }
+        weaponAnim.SetBool("isShooting", isShooting);
+
+    }
 
     void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
@@ -132,4 +169,17 @@ public class Shoot : MonoBehaviour
     }
     
 
+    private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.CompareTag("Enemy")){
+            Debug.Log("enemy hit");
+            EnemyRagdoll enemyMelee = other.gameObject.GetComponent<EnemyRagdoll>();
+            enemyMelee.enemyHealth -= meleeDamage;
+            enemyMelee.ShowDamage();
+            TextMesh[] enemyTexts  = enemyMelee.GetComponentsInChildren<TextMesh>();
+
+                foreach(TextMesh enemyDamageText in enemyTexts){
+                    enemyDamageText.text = enemyMelee.enemyHealth.ToString();
+                }
+        }  
+    }
 }

@@ -2636,7 +2636,7 @@ GameObject:
   - component: {fileID: 2875418277779886637}
   m_Layer: 0
   m_Name: ENEMIES
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28848,6 +28848,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2696666195233715843, guid: 40f39e21ee5a96f4686d9528e90e9f14,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3003076645566537905, guid: 40f39e21ee5a96f4686d9528e90e9f14,
         type: 3}
       propertyPath: floatingDamageText
@@ -28988,6 +28993,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -29151,6 +29161,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -29312,6 +29327,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -29475,6 +29495,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -29636,6 +29661,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -29799,6 +29829,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -29960,6 +29995,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -30123,6 +30163,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -30284,6 +30329,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -30447,6 +30497,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -30608,6 +30663,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -30771,6 +30831,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -30932,6 +30997,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -31095,6 +31165,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -31256,6 +31331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -31419,6 +31499,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -31580,6 +31665,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -31743,6 +31833,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -31904,6 +31999,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -32067,6 +32167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -32228,6 +32333,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -32391,6 +32501,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -32552,6 +32667,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -32715,6 +32835,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -32876,6 +33001,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -33039,6 +33169,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -33200,6 +33335,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -33363,6 +33503,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -33524,6 +33669,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -33687,6 +33837,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -33848,6 +34003,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -34011,6 +34171,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -34172,6 +34337,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
@@ -34335,6 +34505,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ragdol (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}
       propertyPath: m_Enabled
@@ -34496,6 +34671,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ragdol (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfa741bdd50c91b4e8a262a6d12801bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dfa741bdd50c91b4e8a262a6d12801bb,
         type: 3}

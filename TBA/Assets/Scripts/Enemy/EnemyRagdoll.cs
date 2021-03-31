@@ -25,7 +25,9 @@ public class EnemyRagdoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(enemyHealth <= 0){
+            Die();
+        }
     }
 
     public void Die(){
