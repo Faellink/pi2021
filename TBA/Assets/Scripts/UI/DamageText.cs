@@ -5,12 +5,14 @@ using UnityEngine;
 public class DamageText : MonoBehaviour
 {
     public float destroyTime = 2f;
+    public Vector3 Offset = new Vector3(0,2,0);
     public Transform playerTarget;
 
     // Start is called before the first frame update
     void Start()
     {
         playerTarget = GameObject.FindWithTag("Player").transform;
+        transform.localPosition += Offset;
         Destroy(gameObject,destroyTime);
     }
 
@@ -19,4 +21,5 @@ public class DamageText : MonoBehaviour
     {
         transform.rotation = Quaternion.LookRotation(transform.position - playerTarget.position);
     }
+    
 }

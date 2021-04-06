@@ -1630,6 +1630,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  cameraBobbing: {fileID: 0}
 --- !u!4 &316451124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9a13d0dc49caec049b9b64729fd9bdeb,
@@ -64837,7 +64838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headTransform: {fileID: 963194228}
   cameraTransform: {fileID: 963194228}
-  bobFrequency: 5
+  bobFrequency: 7
   bobHorizontalAmplitude: 0.02
   bobVerticalAmplitude: 0.1
   headBobSmoothing: 0.02

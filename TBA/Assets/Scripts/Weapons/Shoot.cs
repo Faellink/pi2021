@@ -97,7 +97,8 @@ public class Shoot : MonoBehaviour
 
                 TextMesh[] enemyTexts  = enemy.GetComponentsInChildren<TextMesh>();
 
-                foreach(TextMesh enemyDamageText in enemyTexts){
+                foreach (TextMesh enemyDamageText in enemyTexts)
+                {
                     enemyDamageText.text = enemy.enemyHealth.ToString();
                 }
 
@@ -105,14 +106,16 @@ public class Shoot : MonoBehaviour
                 {
                     enemy.Die();
                     Collider[] enemiesToAddForce = Physics.OverlapSphere(raycastHit.point, explosionRadius);
-                    foreach(Collider enemiesToRagdoll in enemiesToAddForce){
+                    foreach (Collider enemiesToRagdoll in enemiesToAddForce)
+                    {
                         Rigidbody ragdollRigid = enemiesToRagdoll.GetComponent<Rigidbody>();
-                        if(ragdollRigid != null){
+                        if (ragdollRigid != null)
+                        {
                             ragdollRigid.AddExplosionForce(explosionForce, raycastHit.point, explosionRadius);
                         }
 
                     }
-                    
+
                 }
             }
             
@@ -167,19 +170,39 @@ public class Shoot : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(explosionCenter, explosionRadius);
     }
-    
 
-    private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.CompareTag("Enemy")){
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
             Debug.Log("enemy hit");
             EnemyRagdoll enemyMelee = other.gameObject.GetComponent<EnemyRagdoll>();
             enemyMelee.enemyHealth -= meleeDamage;
             enemyMelee.ShowDamage();
-            TextMesh[] enemyTexts  = enemyMelee.GetComponentsInChildren<TextMesh>();
 
-                foreach(TextMesh enemyDamageText in enemyTexts){
-                    enemyDamageText.text = enemyMelee.enemyHealth.ToString();
+            TextMesh[] enemyTexts = enemyMelee.GetComponentsInChildren<TextMesh>();
+
+            foreach (TextMesh enemyDamageText in enemyTexts)
+            {
+                enemyDamageText.text = enemyMelee.enemyHealth.ToString();
+            }
+
+            //
+
+            Collider[] enemiesToAddForce = Physics.OverlapSphere(transform.position, explosionRadius);
+            foreach (Collider enemiesToRagdoll in enemiesToAddForce)
+            {
+                Rigidbody ragdollRigid = enemiesToRagdoll.GetComponent<Rigidbody>();
+                if (ragdollRigid != null)
+                {
+                    ragdollRigid.AddExplosionForce(explosionForce, transform.position, explosionRadius);
                 }
-        }  
+
+            }
+
+        }
+
     }
 }

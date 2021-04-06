@@ -17,22 +17,42 @@ public class PlayerController : MonoBehaviour
     public float groundDistance = 0.5f;
     public LayerMask groundMask;
 
-    bool isGrounded;
-    bool onAir;
+    private Vector3 lastPos= Vector3.zero;
 
+    bool isGrounded;
+    bool onAir = false;
+
+    public CameraBobbing cameraBobbing;
 
     // Start is called before the first frame update
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _airSpeed = _speed / 2f;
-
+        cameraBobbing = GetComponentInChildren<CameraBobbing>();
     }
 
     // Update is called once per frame
     void Update()
     {
         PlayerMovement();
+        //
+        var dist = Vector3.Distance(transform.position, lastPos);
+        lastPos = transform.position;
+        if (Time.deltaTime > 0)
+        { // avoid errors when game paused
+            var speed = dist / Time.deltaTime; // calculate speed
+            if (speed > 0.1f)
+            {
+                Debug.Log("walking");
+                cameraBobbing.isWalking = true;
+            }
+            else
+            {
+                Debug.Log("stop");
+                cameraBobbing.isWalking = false;
+            }
+        }
     }
 
     void PlayerMovement()
