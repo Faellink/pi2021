@@ -8,7 +8,7 @@ public class EnemyRagdoll : MonoBehaviour
 
     Rigidbody mainRigidbody;
     Collider mainCollider;
-    Animator animator;
+    public Animator animator;
     public float enemyHealth = 100f;
 
     public GameObject floatingDamageText;
