@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     float _airSpeed = 0;
     public float _gravity = -9.81f;
     public float _jumpForce = 10f; 
+    public float playerHealth = 100f;
 
     Vector3 velocity;
     public Transform groundCheck;
@@ -23,6 +24,13 @@ public class PlayerController : MonoBehaviour
     bool onAir = false;
 
     public CameraBobbing cameraBobbing;
+    public CameraShake cameraShake;
+    public float cameraShakeDuration;
+    public float cameraShakeForce;
+
+    public HelmetShake helmetShake;
+    public float helmetShakeDuration;
+    public float helmetShakeForce;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +38,9 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _airSpeed = _speed / 2f;
         cameraBobbing = GetComponentInChildren<CameraBobbing>();
+        cameraShake = GetComponentInChildren<CameraShake>();
+        helmetShake = GetComponentInChildren<HelmetShake>();
+        onAir = false;
     }
 
     // Update is called once per frame
@@ -53,6 +64,7 @@ public class PlayerController : MonoBehaviour
                 cameraBobbing.isWalking = false;
             }
         }
+        DebugPause();
     }
 
     void PlayerMovement()
@@ -91,6 +103,21 @@ public class PlayerController : MonoBehaviour
         velocity.y += _gravity * Time.deltaTime;
 
         _characterController.Move(velocity * Time.deltaTime);
+    }
+
+    void DebugPause(){
+        if(Input.GetKeyDown(KeyCode.Q)){
+            Debug.Break();
+        }
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if(other.gameObject.CompareTag("EnemyRangedAttack")){   
+            playerHealth -= 10f;
+            Destroy(other.gameObject);
+            StartCoroutine(cameraShake.Shake(cameraShakeDuration,cameraShakeForce));
+            StartCoroutine(helmetShake.Shake(helmetShakeDuration,helmetShakeForce));
+        }    
     }
 
 }

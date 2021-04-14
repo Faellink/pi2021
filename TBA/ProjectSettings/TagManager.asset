@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Object
+  - PlayerTarget
+  - EnemyRangedAttack
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - 
   - Ground
   - Helmet
-  - 
-  - 
+  - Enemy
+  - EnergyBall
   - 
   - 
   - 

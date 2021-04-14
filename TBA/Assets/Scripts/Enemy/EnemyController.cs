@@ -10,6 +10,9 @@ public class EnemyController : MonoBehaviour
     public float meleeAttackRange = 2f;
     public float rangedAttackRange = 10f;
 
+    public int rangedAttackAmmo;
+    public int rangedAttackAmmoLimit =1;
+
     public float distance;
     public float attackDistance;
 
@@ -17,6 +20,10 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent navMeshAgent;
 
     EnemyRagdoll enemyRagdoll;
+
+    public GameObject rangedAttackPrefab;
+
+    public Transform rangedAttackShooter;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +45,13 @@ public class EnemyController : MonoBehaviour
 
         distance = Vector3.Distance(playerTarget.position, transform.position);
 
+        if(distance <rangedAttackRange){
+            navMeshAgent.isStopped = true;
+            RangedAttack();
+        }
+
+        //Debug.Log(navMeshAgent.isStopped);
+
     }
 
     void FollowPlayerTarget(){
@@ -54,7 +68,10 @@ public class EnemyController : MonoBehaviour
 
     void RangedAttack(){
         //throw energy ball
-        navMeshAgent.isStopped = true;
+        //navMeshAgent.isStopped = true;
+        //navMeshAgent.velocity = Vector3.zero;
+        StartCoroutine(RangedAttackCoroutine());
+        //Instantiate(rangedAttackPrefab,rangedAttackShooter.position, Quaternion.identity);
     }
 
     void OnDrawGizmos() {
@@ -62,5 +79,15 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, meleeAttackRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, rangedAttackRange);
+    }
+
+    IEnumerator RangedAttackCoroutine(){
+        yield return new WaitForSeconds(2f);
+        Debug.Log("attacking");
+        if(rangedAttackAmmo < rangedAttackAmmoLimit){
+            Instantiate(rangedAttackPrefab,rangedAttackShooter.position, Quaternion.LookRotation(transform.forward, transform.up));
+            rangedAttackAmmo++;
+        }
+        
     }
 }
