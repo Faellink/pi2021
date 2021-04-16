@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,13 +25,21 @@ public class PlayerController : MonoBehaviour
     bool onAir = false;
 
     public CameraBobbing cameraBobbing;
-    public CameraShake cameraShake;
-    public float cameraShakeDuration;
-    public float cameraShakeForce;
+    public GameObject posProcessingHitEffect;
 
-    public HelmetShake helmetShake;
-    public float helmetShakeDuration;
-    public float helmetShakeForce;
+    // public CameraShake cameraShake;
+    // public float cameraShakeDuration;
+    // public float cameraShakeForce;
+
+    // public HelmetShake helmetShake;
+    // public float helmetShakeDuration;
+    // public float helmetShakeForce;
+
+    public float cameraShakeMagnitude;
+    public float cameraShakeRoughness;
+    public float cameraShakeFadeInTime;
+    public float cameraShakeFadeOutTime;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +47,8 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _airSpeed = _speed / 2f;
         cameraBobbing = GetComponentInChildren<CameraBobbing>();
-        cameraShake = GetComponentInChildren<CameraShake>();
-        helmetShake = GetComponentInChildren<HelmetShake>();
+        // cameraShake = GetComponentInChildren<CameraShake>();
+        // helmetShake = GetComponentInChildren<HelmetShake>();
         onAir = false;
     }
 
@@ -65,6 +74,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         DebugPause();
+        DebugCameraShake();
     }
 
     void PlayerMovement()
@@ -111,12 +121,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void DebugCameraShake(){
+        if(Input.GetKeyDown(KeyCode.T)){
+            CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude,cameraShakeRoughness,cameraShakeFadeInTime,cameraShakeFadeOutTime);
+            posProcessingHitEffect.SetActive(true);
+        }
+    }
+
     void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("EnemyRangedAttack")){   
             playerHealth -= 10f;
             Destroy(other.gameObject);
-            StartCoroutine(cameraShake.Shake(cameraShakeDuration,cameraShakeForce));
-            StartCoroutine(helmetShake.Shake(helmetShakeDuration,helmetShakeForce));
+            // StartCoroutine(cameraShake.Shake(cameraShakeDuration,cameraShakeForce));
+            // StartCoroutine(helmetShake.Shake(helmetShakeDuration,helmetShakeForce));
+            //CameraShaker.Instance.ShakeOnce(4f,4f,.1f,1f);
         }    
     }
 
