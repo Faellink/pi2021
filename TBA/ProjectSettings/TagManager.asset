@@ -8,6 +8,7 @@ TagManager:
   - Object
   - PlayerTarget
   - EnemyRangedAttack
+  - HP
   layers:
   - Default
   - TransparentFX

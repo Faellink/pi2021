@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -40,6 +41,12 @@ public class PlayerController : MonoBehaviour
     public float cameraShakeFadeInTime;
     public float cameraShakeFadeOutTime;
 
+    public RectTransform healthBar;
+    public float hpX;
+    public float debugDamage;
+
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,8 +54,10 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _airSpeed = _speed / 2f;
         cameraBobbing = GetComponentInChildren<CameraBobbing>();
+        healthBar = GameObject.FindGameObjectWithTag("HP").GetComponent<RectTransform>();
         // cameraShake = GetComponentInChildren<CameraShake>();
         // helmetShake = GetComponentInChildren<HelmetShake>();
+        hpX = 796f;
         onAir = false;
     }
 
@@ -75,6 +84,7 @@ public class PlayerController : MonoBehaviour
         }
         DebugPause();
         DebugCameraShake();
+        DebugHealthBar();
     }
 
     void PlayerMovement()
@@ -125,6 +135,13 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T)){
             CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude,cameraShakeRoughness,cameraShakeFadeInTime,cameraShakeFadeOutTime);
             posProcessingHitEffect.SetActive(true);
+        }
+    }
+
+    void DebugHealthBar(){
+        if(Input.GetKeyDown(KeyCode.U)){
+            hpX-=debugDamage;
+            healthBar.sizeDelta = new Vector2(hpX,100);
         }
     }
 
