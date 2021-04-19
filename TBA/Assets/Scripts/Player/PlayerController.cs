@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public CameraBobbing cameraBobbing;
     public GameObject posProcessingHitEffect;
+    public float postProcessingTimer;
 
     // public CameraShake cameraShake;
     // public float cameraShakeDuration;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public float cameraShakeFadeInTime;
     public float cameraShakeFadeOutTime;
 
+    public Animator healthBarAnim;
     public RectTransform healthBar;
     public float hpX;
     public float debugDamage;
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour
         _airSpeed = _speed / 2f;
         cameraBobbing = GetComponentInChildren<CameraBobbing>();
         healthBar = GameObject.FindGameObjectWithTag("HP").GetComponent<RectTransform>();
+        healthBarAnim = GameObject.FindGameObjectWithTag("HP Anim").GetComponent<Animator>();
         // cameraShake = GetComponentInChildren<CameraShake>();
         // helmetShake = GetComponentInChildren<HelmetShake>();
         hpX = 796f;
@@ -145,9 +148,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void PlayerDamage(){
+        
+        StartCoroutine(HealthBarAnimationTimer());
+        hpX -= debugDamage;
+        healthBar.sizeDelta = new Vector2(hpX,100);
+
+        playerHealth -= debugDamage;
+
+        CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude,cameraShakeRoughness,cameraShakeFadeInTime,cameraShakeFadeOutTime);
+
+        StartCoroutine(PostProcessingHit());
+        
+    }
+
+    IEnumerator HealthBarAnimationTimer(){
+        healthBarAnim.SetBool("DamageOn",true);
+        yield return new WaitForSeconds(postProcessingTimer);
+        healthBarAnim.SetBool("DamageOn",false);
+    }
+
+    IEnumerator PostProcessingHit(){
+        posProcessingHitEffect.SetActive(true);
+        yield return new WaitForSeconds(postProcessingTimer);
+        posProcessingHitEffect.SetActive(false);
+    }
+
     void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("EnemyRangedAttack")){   
-            playerHealth -= 10f;
+            //playerHealth -= 10f;
+            PlayerDamage();
             Destroy(other.gameObject);
             // StartCoroutine(cameraShake.Shake(cameraShakeDuration,cameraShakeForce));
             // StartCoroutine(helmetShake.Shake(helmetShakeDuration,helmetShakeForce));

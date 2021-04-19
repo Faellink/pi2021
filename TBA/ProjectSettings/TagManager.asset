@@ -10,6 +10,7 @@ TagManager:
   - EnemyRangedAttack
   - HP
   - Pulse
+  - HP Anim
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Helmet
   - Enemy
   - EnergyBall
-  - 
+  - Buildings
   - 
   - 
   - 
