@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         _airSpeed = _speed / 2f;
         cameraBobbing = GetComponentInChildren<CameraBobbing>();
         healthBar = GameObject.FindGameObjectWithTag("HP").GetComponent<RectTransform>();
-        healthBarAnim = GameObject.FindGameObjectWithTag("HP Anim").GetComponent<Animator>();
+        healthBarAnim = GameObject.FindGameObjectWithTag("HP").GetComponent<Animator>();
         // cameraShake = GetComponentInChildren<CameraShake>();
         // helmetShake = GetComponentInChildren<HelmetShake>();
         hpX = 796f;
@@ -76,12 +76,12 @@ public class PlayerController : MonoBehaviour
             var speed = dist / Time.deltaTime; // calculate speed
             if (speed > 0.1f)
             {
-                Debug.Log("walking");
+                //Debug.Log("walking");
                 cameraBobbing.isWalking = true;
             }
             else
             {
-                Debug.Log("stop");
+                //Debug.Log("stop");
                 cameraBobbing.isWalking = false;
             }
         }
