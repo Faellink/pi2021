@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     float _speed = 5f;
     float _airSpeed = 0;
     public float _gravity = -9.81f;
-    public float _jumpForce = 10f; 
+    public float _jumpForce = 10f;
     public float playerHealth = 100f;
 
     Vector3 velocity;
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float groundDistance = 0.5f;
     public LayerMask groundMask;
 
-    private Vector3 lastPos= Vector3.zero;
+    private Vector3 lastPos = Vector3.zero;
 
     bool isGrounded;
     bool onAir = false;
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     public float hpX;
     public float debugDamage;
 
-    
+
 
 
     // Start is called before the first frame update
@@ -92,9 +92,9 @@ public class PlayerController : MonoBehaviour
 
     void PlayerMovement()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position , groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y <0)
+        if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
             onAir = false;
@@ -128,61 +128,72 @@ public class PlayerController : MonoBehaviour
         _characterController.Move(velocity * Time.deltaTime);
     }
 
-    void DebugPause(){
-        if(Input.GetKeyDown(KeyCode.Q)){
+    void DebugPause()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
             Debug.Break();
         }
     }
 
-    void DebugCameraShake(){
-        if(Input.GetKeyDown(KeyCode.T)){
-            CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude,cameraShakeRoughness,cameraShakeFadeInTime,cameraShakeFadeOutTime);
+    void DebugCameraShake()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, cameraShakeFadeInTime, cameraShakeFadeOutTime);
             posProcessingHitEffect.SetActive(true);
         }
     }
 
-    void DebugHealthBar(){
-        if(Input.GetKeyDown(KeyCode.U)){
-            hpX-=debugDamage;
-            healthBar.sizeDelta = new Vector2(hpX,100);
+    void DebugHealthBar()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            hpX -= debugDamage;
+            healthBar.sizeDelta = new Vector2(hpX, 100);
         }
     }
 
-    void PlayerDamage(){
-        
+    void PlayerDamage()
+    {
+
         StartCoroutine(HealthBarAnimationTimer());
         hpX -= debugDamage;
-        healthBar.sizeDelta = new Vector2(hpX,100);
+        healthBar.sizeDelta = new Vector2(hpX, 100);
 
         playerHealth -= debugDamage;
 
-        CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude,cameraShakeRoughness,cameraShakeFadeInTime,cameraShakeFadeOutTime);
+        CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, cameraShakeFadeInTime, cameraShakeFadeOutTime);
 
         StartCoroutine(PostProcessingHit());
-        
+
     }
 
-    IEnumerator HealthBarAnimationTimer(){
-        healthBarAnim.SetBool("DamageOn",true);
+    IEnumerator HealthBarAnimationTimer()
+    {
+        healthBarAnim.SetBool("DamageOn", true);
         yield return new WaitForSeconds(postProcessingTimer);
-        healthBarAnim.SetBool("DamageOn",false);
+        healthBarAnim.SetBool("DamageOn", false);
     }
 
-    IEnumerator PostProcessingHit(){
+    IEnumerator PostProcessingHit()
+    {
         posProcessingHitEffect.SetActive(true);
         yield return new WaitForSeconds(postProcessingTimer);
         posProcessingHitEffect.SetActive(false);
     }
 
-    void OnTriggerEnter(Collider other) {
-        if(other.gameObject.CompareTag("EnemyRangedAttack")){   
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyRangedAttack"))
+        {
             //playerHealth -= 10f;
             PlayerDamage();
             Destroy(other.gameObject);
             // StartCoroutine(cameraShake.Shake(cameraShakeDuration,cameraShakeForce));
             // StartCoroutine(helmetShake.Shake(helmetShakeDuration,helmetShakeForce));
             //CameraShaker.Instance.ShakeOnce(4f,4f,.1f,1f);
-        }    
+        }
     }
 
 }

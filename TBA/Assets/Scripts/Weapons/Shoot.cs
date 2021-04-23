@@ -11,14 +11,14 @@ public class Shoot : MonoBehaviour
 
     public float range = 100f;
     public float fireRate = 15f;
-    public float  impactForce = 50f;
+    public float impactForce = 50f;
     float nextTimeToFire = 0f;
     public bool isShooting;
     public bool canShoot;
 
     public float meleeDamage = 50f;
     public float meleeForce;
-    
+
 
     public float explosionForce = 500f;
     public float explosionRadius = 10f;
@@ -46,7 +46,7 @@ public class Shoot : MonoBehaviour
 
     public Image hearBar;
     public float cooldownSpeed;
-    
+
     public Coroutine overheatCoroutine;
 
 
@@ -57,7 +57,7 @@ public class Shoot : MonoBehaviour
         fpsCamera = Camera.main;
         weaponAnim = GetComponent<Animator>();
         weaponAnim.SetBool("isMelee", false);
-        cooldown = Mathf.Clamp(cooldown,0f,200f);
+        cooldown = Mathf.Clamp(cooldown, 0f, 200f);
         originalCooldown = cooldown;
     }
 
@@ -72,7 +72,7 @@ public class Shoot : MonoBehaviour
             ShootWeapon();
             isShooting = true;
             muzzleFlash.Play();
-           
+
         }
 
 
@@ -86,7 +86,7 @@ public class Shoot : MonoBehaviour
         WeaponMelee();
 
         WeaponAnimation();
-        
+
         Cooldown();
 
     }
@@ -95,28 +95,31 @@ public class Shoot : MonoBehaviour
     {
 
         //InstantiateBullet();
-        
-      
+
+
 
         RaycastHit raycastHit;
-        if(Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward , out raycastHit, range))
-        {   
+        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out raycastHit, range))
+        {
             explosionCenter = raycastHit.point;
             //
             EnemyRagdoll enemy = raycastHit.transform.GetComponent<EnemyRagdoll>();
             if (enemy != null)
-            {             
-               //enemy.Die();
+            {
+                //enemy.Die();
                 enemy.enemyHealth -= shotdamage;
                 // randomDamage = Random.Range(10, 26);
                 // enemy.enemyHealth -= randomDamage;
-                
+
                 //
-                
 
-                enemy.ShowDamage();
+                if (enemy.enemyHealth > 0)
+                {
+                    enemy.ShowDamage();
+                }
+                //enemy.ShowDamage();
 
-                TextMesh[] enemyTexts  = enemy.GetComponentsInChildren<TextMesh>();
+                TextMesh[] enemyTexts = enemy.GetComponentsInChildren<TextMesh>();
 
                 foreach (TextMesh enemyDamageText in enemyTexts)
                 {
@@ -139,8 +142,8 @@ public class Shoot : MonoBehaviour
 
                 }
             }
-            
-            
+
+
 
             //Debug.Log(raycastHit.transform.name);
 
@@ -151,12 +154,13 @@ public class Shoot : MonoBehaviour
             }
 
             Grenade enemyBallGrenade = raycastHit.transform.GetComponent<Grenade>();
-            if(enemyBallGrenade != null){
+            if (enemyBallGrenade != null)
+            {
                 Debug.Log("acertou as bolas!");
                 enemyBallGrenade.shooted = true;
             }
 
-            GameObject hitGO =  Instantiate(hitEffect, raycastHit.point, Quaternion.LookRotation(raycastHit.normal));
+            GameObject hitGO = Instantiate(hitEffect, raycastHit.point, Quaternion.LookRotation(raycastHit.normal));
             Destroy(hitGO, 2f);
 
             // if( raycastHit.rigidbody != null)
@@ -172,22 +176,27 @@ public class Shoot : MonoBehaviour
     //     Instantiate(bulletPrefab, shooter.position, Quaternion.identity);
     // }
 
-    void WeaponMelee(){
-        
-        if(Input.GetKeyDown(KeyCode.F)){
-        weaponAnim.Play("Melee");
+    void WeaponMelee()
+    {
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            weaponAnim.Play("Melee");
         }
 
     }
 
-    void WeaponAnimation(){
+    void WeaponAnimation()
+    {
 
         if (weaponAnim.GetCurrentAnimatorStateInfo(0).IsName("Melee"))
         {
             //Debug.Log(weaponAnim.GetCurrentAnimatorStateInfo(0).IsName("Melee"));
             canShoot = false;
-        }else{
-            canShoot= true;
+        }
+        else
+        {
+            canShoot = true;
         }
         weaponAnim.SetBool("isShooting", isShooting);
 
@@ -196,34 +205,38 @@ public class Shoot : MonoBehaviour
     void Cooldown()
     {
 
-        if(isShooting == true){
+        if (isShooting == true)
+        {
             heat += heatValue;
         }
-        
-        if(heat > 0){
+
+        if (heat > 0)
+        {
             heat -= cooldown;
         }
 
-        heat = Mathf.Clamp(heat,heatMin,heatMax);
+        heat = Mathf.Clamp(heat, heatMin, heatMax);
 
-        if(heat >= heatMax - heatValue){
-            
+        if (heat >= heatMax - heatValue)
+        {
+
         }
-        
-        hearBar.fillAmount = heat/heatMax;
-        
+
+        hearBar.fillAmount = heat / heatMax;
+
         //Debug.Log(hearBar.fillAmount);
     }
 
-    
 
 
-    void OnDrawGizmos() {
+
+    void OnDrawGizmos()
+    {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(explosionCenter, explosionRadius);
     }
 
-    
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -258,7 +271,8 @@ public class Shoot : MonoBehaviour
 
         }
 
-        if(other.gameObject.CompareTag("EnemyRangedAttack")){
+        if (other.gameObject.CompareTag("EnemyRangedAttack"))
+        {
             Debug.Log("ball hit");
             Rigidbody ballRigidbody = other.gameObject.GetComponent<Rigidbody>();
             ballRigidbody.AddForce(fpsCamera.transform.forward * meleeForce);

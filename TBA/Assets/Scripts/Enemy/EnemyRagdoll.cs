@@ -17,7 +17,7 @@ public class EnemyRagdoll : MonoBehaviour
 
     public GameObject floatingDamageText;
 
-    
+
 
     void Start()
     {
@@ -32,39 +32,46 @@ public class EnemyRagdoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(enemyHealth <= 0 && isDead == false){
+        if (enemyHealth <= 0 && isDead == false)
+        {
             isDead = true;
             GameManager.score += enemyScoreValue;
             Die();
         }
 
-        
+
     }
 
-    public void Die(){
+    public void Die()
+    {
         //Destroy(gameObject, 10f);
         animator.enabled = false;
         SetRigidBodyState(false);
         SetColliders(true);
     }
 
-    void SetRigidBodyState(bool state){
+    void SetRigidBodyState(bool state)
+    {
         Rigidbody[] rigidBodies = GetComponentsInChildren<Rigidbody>();
-        foreach(Rigidbody rigidbody in rigidBodies){
+        foreach (Rigidbody rigidbody in rigidBodies)
+        {
             rigidbody.isKinematic = state;
         }
         mainRigidbody.isKinematic = !state;
     }
 
-    void SetColliders(bool state){
+    void SetColliders(bool state)
+    {
         Collider[] colliders = GetComponentsInChildren<Collider>();
-        foreach(Collider col in colliders){
+        foreach (Collider col in colliders)
+        {
             col.enabled = state;
         }
         mainCollider.enabled = !state;
     }
-    
-    public void ShowDamage(){
+
+    public void ShowDamage()
+    {
         Instantiate(floatingDamageText, transform.position, Quaternion.identity, transform);
     }
 }

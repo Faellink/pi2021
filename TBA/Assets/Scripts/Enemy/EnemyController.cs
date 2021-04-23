@@ -11,10 +11,10 @@ public class EnemyController : MonoBehaviour
     public float rangedAttackRange = 10f;
 
     public int rangedAttackAmmo;
-    public int rangedAttackAmmoLimit =1;
+    public int rangedAttackAmmoLimit = 1;
 
     public int meleeHits;
-    public int meleeLimit =1;
+    public int meleeLimit = 1;
 
     bool canShoot;
     public bool canMelee;
@@ -51,57 +51,78 @@ public class EnemyController : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navAgentAnim = GetComponent<Animator>();
         enemyRagdoll = GetComponent<EnemyRagdoll>();
-        enemyBehaviour = Random.Range(0,2);
+        enemyBehaviour = Random.Range(0, 2);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(enemyRagdoll.enemyHealth > 0){
+
+        // if(enemyRagdoll.enemyHealth <= 0){
+        //     gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        // }
+
+        if (enemyRagdoll.enemyHealth > 0)
+        {
             FollowPlayerTarget();
             //state = State.Follow;
-        }else{
-            navMeshAgent.enabled = false;
         }
+        else
+        {
+            //navMeshAgent.enabled = false;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        }
+
         //FollowPlayerTarget();
 
         distance = Vector3.Distance(playerTarget.position, transform.position);
 
-        if (enemyBehaviour == 0)
+
+        if (enemyRagdoll.enemyHealth > 0)
         {
-            //ranged
+            transform.LookAt(playerTarget);
 
-            if(canShoot == false){
-                Invoke("RangedAttackTimer", 0.5f);
-            }
-
-            if(distance <rangedAttackRange && canShoot == true){
-                navMeshAgent.isStopped = true;
-                rangedAttackAmmo=0;
-                //RangedAttack();
-                Invoke("RangedAttack", 1f);
-            }
-
-        }
-        else if (enemyBehaviour == 1)
-        {
-            //melee
-
-            if(canMelee == false){
-                Invoke("MeleeAttackTimer", 0.5f);
-            }
-
-            if (distance < rangedAttackRange && canMelee == true)
+            if (enemyBehaviour == 0)
             {
-                navMeshAgent.isStopped = true;
-                meleeHits = 0;
-                Invoke("MeleeAttack", 1f);
-            }
+                //ranged
 
-            if(navAgentAnim.GetCurrentAnimatorStateInfo(0).IsName("EnemyMelee")){
-                navAgentAnim.SetBool("isMelee", false);
+                if (canShoot == false)
+                {
+                    Invoke("RangedAttackTimer", 0.5f);
+                }
+
+                if (distance < rangedAttackRange && canShoot == true)
+                {
+                    navMeshAgent.isStopped = true;
+                    rangedAttackAmmo = 0;
+                    //RangedAttack();
+                    Invoke("RangedAttack", 1f);
+                }
+
+            }
+            else if (enemyBehaviour == 1)
+            {
+                //melee
+
+                if (canMelee == false)
+                {
+                    Invoke("MeleeAttackTimer", 0.5f);
+                }
+
+                if (distance < rangedAttackRange && canMelee == true)
+                {
+                    navMeshAgent.isStopped = true;
+                    meleeHits = 0;
+                    Invoke("MeleeAttack", 1f);
+                }
+
+                if (navAgentAnim.GetCurrentAnimatorStateInfo(0).IsName("EnemyMelee"))
+                {
+                    navAgentAnim.SetBool("isMelee", false);
+                }
             }
         }
+
 
         // if(canShoot == false){
         //     Invoke("RangedAttackTimer", 0.5f);
@@ -129,7 +150,7 @@ public class EnemyController : MonoBehaviour
         //     navAgentAnim.SetBool("isMelee", false);
         // }
 
-        transform.LookAt(playerTarget);
+        //transform.LookAt(playerTarget);
 
         EnemyAnimations();
 
@@ -150,13 +171,14 @@ public class EnemyController : MonoBehaviour
         //         break;
         // }
 
-        if(enemyRagdoll.enemyHealth <= 0){
-            gameObject.GetComponent<NavMeshAgent>().enabled = false;
-        }
+        // if(enemyRagdoll.enemyHealth <= 0){
+        //     gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        // }
 
     }
 
-    void FollowPlayerTarget(){
+    void FollowPlayerTarget()
+    {
         navMeshAgent.SetDestination(playerTarget.position);
     }
 
@@ -179,52 +201,61 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    void MeleeAttackTimer(){
+    void MeleeAttackTimer()
+    {
         canMelee = true;
     }
 
-    void MeleeAttack(){
-        if(meleeHits < meleeLimit){
+    void MeleeAttack()
+    {
+        if (meleeHits < meleeLimit)
+        {
             //Instantiate(rangedAttackPrefab,rangedAttackShooter.position, Quaternion.LookRotation(transform.forward, transform.up));
             navAgentAnim.SetBool("isMelee", true);
             meleeHits++;
             navMeshAgent.isStopped = false;
-        } 
+        }
         canMelee = false;
     }
 
-    void RangedAttackTimer(){
+    void RangedAttackTimer()
+    {
         canShoot = true;
     }
 
-    void RangedAttack(){
+    void RangedAttack()
+    {
         //throw energy ball
         //navMeshAgent.isStopped = true;
         //navMeshAgent.velocity = Vector3.zero;
         //StartCoroutine(RangedAttackCoroutine());
         //Instantiate(rangedAttackPrefab,rangedAttackShooter.position, Quaternion.identity);
-        if(rangedAttackAmmo < rangedAttackAmmoLimit){
-            Instantiate(rangedAttackPrefab,rangedAttackShooter.position, Quaternion.LookRotation(transform.forward, transform.up));
+        if (rangedAttackAmmo < rangedAttackAmmoLimit)
+        {
+            Instantiate(rangedAttackPrefab, rangedAttackShooter.position, Quaternion.LookRotation(transform.forward, transform.up));
             rangedAttackAmmo++;
             navMeshAgent.isStopped = false;
-        } 
+        }
         canShoot = false;
     }
 
-    void OnDrawGizmos() {
+    void OnDrawGizmos()
+    {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, meleeAttackRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, rangedAttackRange);
     }
 
-    IEnumerator RangedAttackCoroutine(){
+    IEnumerator RangedAttackCoroutine()
+    {
         yield return new WaitForSeconds(2f);
         Debug.Log("attacking");
-        if(rangedAttackAmmo < rangedAttackAmmoLimit){
-            Instantiate(rangedAttackPrefab,rangedAttackShooter.position, Quaternion.LookRotation(transform.forward, transform.up));
+        if (rangedAttackAmmo < rangedAttackAmmoLimit)
+        {
+            Instantiate(rangedAttackPrefab, rangedAttackShooter.position, Quaternion.LookRotation(transform.forward, transform.up));
             rangedAttackAmmo++;
             navMeshAgent.isStopped = false;
-        } 
+        }
     }
 }
