@@ -13,39 +13,60 @@ public class Grenade : MonoBehaviour
     float countdown;
     bool hasExploded = false;
 
+    public bool shooted;
+
     public GameObject explosionEffect;
 
     void Start()
     {
         countdown = delay;
+        shooted = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         countdown -= Time.deltaTime;
-        if(countdown <= 0f && !hasExploded){
-            Explode();
-            hasExploded = true;
+        if (countdown <= 0f && !hasExploded)
+        {
+            if (shooted == true)
+            {
+                Explode();
+                hasExploded = true;
+            }
         }
     }
 
     void Explode(){
 
         Instantiate(explosionEffect, transform.position, transform.rotation);
-        
-        Collider[] colliders =  Physics.OverlapSphere(transform.position, explosionRadius);
-        foreach(Collider nearCollider in colliders){
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider nearCollider in colliders)
+        {
             //
             EnemyRagdoll enemy = nearCollider.GetComponent<EnemyRagdoll>();
-            if(enemy != null){
+            if (enemy != null)
+            {
                 enemy.enemyHealth -= grenadeDamage;
-                if(enemy.enemyHealth <= 0f){
+                enemy.ShowDamage();
+
+                TextMesh[] enemyTexts = enemy.GetComponentsInChildren<TextMesh>();
+
+                foreach (TextMesh enemyDamageText in enemyTexts)
+                {
+                    enemyDamageText.text = enemy.enemyHealth.ToString();
+                }
+
+                if (enemy.enemyHealth <= 0f)
+                {
                     enemy.Die();
                     Collider[] collidersToExplode = Physics.OverlapSphere(transform.position, explosionRadius);
-                    foreach(Collider collidersRagdoll in collidersToExplode){
-                        Rigidbody ragdolls =  collidersRagdoll.GetComponent<Rigidbody>();
-                        if(ragdolls != null){
+                    foreach (Collider collidersRagdoll in collidersToExplode)
+                    {
+                        Rigidbody ragdolls = collidersRagdoll.GetComponent<Rigidbody>();
+                        if (ragdolls != null)
+                        {
                             ragdolls.AddExplosionForce(grenadeForce, transform.position, explosionRadius);
                         }
 

@@ -11,6 +11,7 @@ TagManager:
   - HP
   - Pulse
   - HP Anim
+  - Score
   layers:
   - Default
   - TransparentFX

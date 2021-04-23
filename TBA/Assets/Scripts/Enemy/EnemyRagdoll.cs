@@ -11,10 +11,17 @@ public class EnemyRagdoll : MonoBehaviour
     public Animator animator;
     public float enemyHealth = 100f;
 
+    public float enemyScoreValue = 100f;
+
+    bool isDead;
+
     public GameObject floatingDamageText;
+
+    
 
     void Start()
     {
+        isDead = false;
         mainRigidbody = GetComponent<Rigidbody>();
         mainCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
@@ -25,9 +32,13 @@ public class EnemyRagdoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(enemyHealth <= 0){
+        if(enemyHealth <= 0 && isDead == false){
+            isDead = true;
+            GameManager.score += enemyScoreValue;
             Die();
         }
+
+        
     }
 
     public void Die(){
@@ -55,7 +66,5 @@ public class EnemyRagdoll : MonoBehaviour
     
     public void ShowDamage(){
         Instantiate(floatingDamageText, transform.position, Quaternion.identity, transform);
-        
-
     }
 }

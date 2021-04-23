@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shoot : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Shoot : MonoBehaviour
     public bool canShoot;
 
     public float meleeDamage = 50f;
+    public float meleeForce;
     
 
     public float explosionForce = 500f;
@@ -33,6 +35,21 @@ public class Shoot : MonoBehaviour
 
     public Animator weaponAnim;
 
+    public float heat;
+    float heatMin = 0f;
+    public float heatMax;
+    public float heatValue;
+    public float cooldown;
+    float originalCooldown;
+    public bool isOverheated;
+    public float overheatTime;
+
+    public Image hearBar;
+    public float cooldownSpeed;
+    
+    public Coroutine overheatCoroutine;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +57,8 @@ public class Shoot : MonoBehaviour
         fpsCamera = Camera.main;
         weaponAnim = GetComponent<Animator>();
         weaponAnim.SetBool("isMelee", false);
+        cooldown = Mathf.Clamp(cooldown,0f,200f);
+        originalCooldown = cooldown;
     }
 
     // Update is called once per frame
@@ -53,7 +72,7 @@ public class Shoot : MonoBehaviour
             ShootWeapon();
             isShooting = true;
             muzzleFlash.Play();
-
+           
         }
 
 
@@ -67,6 +86,8 @@ public class Shoot : MonoBehaviour
         WeaponMelee();
 
         WeaponAnimation();
+        
+        Cooldown();
 
     }
 
@@ -129,6 +150,12 @@ public class Shoot : MonoBehaviour
                 damage.TakeDamage(shotdamage);
             }
 
+            Grenade enemyBallGrenade = raycastHit.transform.GetComponent<Grenade>();
+            if(enemyBallGrenade != null){
+                Debug.Log("acertou as bolas!");
+                enemyBallGrenade.shooted = true;
+            }
+
             GameObject hitGO =  Instantiate(hitEffect, raycastHit.point, Quaternion.LookRotation(raycastHit.normal));
             Destroy(hitGO, 2f);
 
@@ -166,10 +193,37 @@ public class Shoot : MonoBehaviour
 
     }
 
+    void Cooldown()
+    {
+
+        if(isShooting == true){
+            heat += heatValue;
+        }
+        
+        if(heat > 0){
+            heat -= cooldown;
+        }
+
+        heat = Mathf.Clamp(heat,heatMin,heatMax);
+
+        if(heat >= heatMax - heatValue){
+            
+        }
+        
+        hearBar.fillAmount = heat/heatMax;
+        
+        //Debug.Log(hearBar.fillAmount);
+    }
+
+    
+
+
     void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(explosionCenter, explosionRadius);
     }
+
+    
 
 
     private void OnTriggerEnter(Collider other)
@@ -202,6 +256,12 @@ public class Shoot : MonoBehaviour
 
             }
 
+        }
+
+        if(other.gameObject.CompareTag("EnemyRangedAttack")){
+            Debug.Log("ball hit");
+            Rigidbody ballRigidbody = other.gameObject.GetComponent<Rigidbody>();
+            ballRigidbody.AddForce(fpsCamera.transform.forward * meleeForce);
         }
 
     }

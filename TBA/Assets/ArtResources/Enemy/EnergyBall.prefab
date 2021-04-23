@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2160119644160995155}
   - component: {fileID: 955591257308552222}
   - component: {fileID: 991537056212280957}
+  - component: {fileID: 3682019938778996047}
   m_Layer: 11
   m_Name: EnergyBall
   m_TagString: EnemyRangedAttack
@@ -127,3 +128,22 @@ MonoBehaviour:
   speed: 20
   rotationForce: 10
   rigid: {fileID: 0}
+--- !u!114 &3682019938778996047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160119644160995152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470cd141173c3fa4eb441e6bb049e633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
+  grenadeDamage: 50
+  explosionRadius: 10
+  grenadeForce: 500
+  shooted: 0
+  explosionEffect: {fileID: 6773112444684631069, guid: 28c36edf5f423664e94fb4b3eec1056e,
+    type: 3}
