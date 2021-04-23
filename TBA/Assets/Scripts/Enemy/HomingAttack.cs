@@ -11,6 +11,8 @@ public class HomingAttack : MonoBehaviour
 
     public Rigidbody rigid;
 
+    public bool wasHit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,24 @@ public class HomingAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Vector3 direction = playerTarget.position - rigid.position;
+        // direction.Normalize();
+        // Vector3 rotationAmount = Vector3.Cross(transform.forward, direction);
+        // rigid.angularVelocity = rotationAmount * rotationForce;
+        // rigid.velocity = transform.forward * speed;
+        // float moveY = rigid.velocity.y;
+        // moveY = 0;
+
+        if(wasHit == false){
+            FollowTarget();
+            Debug.Log("normal");
+        }else{
+            Debug.Log("inverse");
+            rigid.velocity = transform.forward * (speed *-1f);
+        }
+    }
+
+    void FollowTarget(){
         Vector3 direction = playerTarget.position - rigid.position;
         direction.Normalize();
         Vector3 rotationAmount = Vector3.Cross(transform.forward, direction);

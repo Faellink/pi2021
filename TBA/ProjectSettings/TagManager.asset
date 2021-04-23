@@ -12,6 +12,7 @@ TagManager:
   - Pulse
   - HP Anim
   - Score
+  - EnemyMeleeHit
   layers:
   - Default
   - TransparentFX

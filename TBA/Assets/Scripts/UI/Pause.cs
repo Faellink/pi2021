@@ -15,28 +15,37 @@ public class Pause : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        isPaused = false;
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+
+        if (GameManager.deathOn == false)
         {
-            if (isPaused == true)
+            if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
             {
-                Resume();
-                quitMenu.SetActive(false);
-            }
-            else
-            {
-                Paused();
+                if (isPaused == true)
+                {
+                    Resume();
+                    quitMenu.SetActive(false);
+                }
+                else
+                {
+                    Paused();
+                }
             }
         }
 
-        if(isPaused){
+
+        if (isPaused)
+        {
             gameUI.SetActive(false);
-        }else{
+        }
+        else
+        {
             gameUI.SetActive(true);
         }
 
@@ -57,10 +66,11 @@ public class Pause : MonoBehaviour
         isPaused = false;
     }
 
-    public void Quit(){
+    public void Quit()
+    {
 
     }
 
-    
 
-}   
+
+}

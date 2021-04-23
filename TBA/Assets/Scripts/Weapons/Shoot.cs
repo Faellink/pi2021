@@ -35,6 +35,10 @@ public class Shoot : MonoBehaviour
 
     public Animator weaponAnim;
 
+    public Animator crosshair;
+
+    public Animator heatBarAnim;
+
     public float heat;
     float heatMin = 0f;
     public float heatMax;
@@ -87,7 +91,11 @@ public class Shoot : MonoBehaviour
 
         WeaponAnimation();
 
+        CrosshairAnim();
+
         Cooldown();
+
+        HeatBarAnim();
 
     }
 
@@ -227,8 +235,45 @@ public class Shoot : MonoBehaviour
         //Debug.Log(hearBar.fillAmount);
     }
 
+    void HeatBarAnim()
+    {
+        if (hearBar.fillAmount > 0.6f)
+        {
+            heatBarAnim.SetBool("Heating",true);
+            heatBarAnim.SetBool("Normal", false);
+            heatBarAnim.SetBool("Overheat", false);
+            heatBarAnim.SetBool("Danger",false);
+        }
+        if(hearBar.fillAmount > 0.8f){
+            heatBarAnim.SetBool("Danger",true);
+            heatBarAnim.SetBool("Heating",false);
+            heatBarAnim.SetBool("Overheat", false);
+            //heatBarAnim.SetBool("");
+        }
+        if(hearBar.fillAmount >= 1f){
+            heatBarAnim.SetBool("Overheat", true);
+            heatBarAnim.SetBool("Danger",false);
+            heatBarAnim.SetBool("Heating",false);
+        }
+        if(hearBar.fillAmount <= 0.6){
+            heatBarAnim.SetBool("Normal", true);
+            heatBarAnim.SetBool("Overheat", false);
+        }
+        
+    }
 
-
+    void CrosshairAnim()
+    {
+        if (isShooting == true)
+        {
+            crosshair.SetBool("isShooting", true);
+        }
+        else
+        {
+            crosshair.SetBool("isShooting", false);
+        }
+    }
+    
 
     void OnDrawGizmos()
     {
@@ -237,7 +282,7 @@ public class Shoot : MonoBehaviour
     }
 
 
-
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -275,6 +320,8 @@ public class Shoot : MonoBehaviour
         {
             Debug.Log("ball hit");
             Rigidbody ballRigidbody = other.gameObject.GetComponent<Rigidbody>();
+            HomingAttack enemyBall = other.gameObject.GetComponent<HomingAttack>();
+            enemyBall.wasHit = true;
             ballRigidbody.AddForce(fpsCamera.transform.forward * meleeForce);
         }
 

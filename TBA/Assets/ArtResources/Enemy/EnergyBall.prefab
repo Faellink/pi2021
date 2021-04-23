@@ -128,6 +128,7 @@ MonoBehaviour:
   speed: 20
   rotationForce: 10
   rigid: {fileID: 0}
+  wasHit: 0
 --- !u!114 &3682019938778996047
 MonoBehaviour:
   m_ObjectHideFlags: 0

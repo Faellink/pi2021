@@ -10,9 +10,15 @@ public class GameManager : MonoBehaviour
 
     public GameObject scoreObject;
 
-    public GameObject deathScreen; 
+    public GameObject deathScreen;
 
     public TextMeshProUGUI scoreText;
+
+    public TextMeshProUGUI[] menuScore;
+
+    public GameObject gameUI;
+
+    public static bool deathOn;
 
     public Animator scoreAnim;
 
@@ -29,32 +35,62 @@ public class GameManager : MonoBehaviour
         score = 0;
         lastScore = score;
         scoreText.text = "";
+        deathOn = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         Score();
+        foreach (TextMeshProUGUI menuScoreText in menuScore)
+        {
+            menuScoreText.text = scoreText.text;
+        }
         ScoreAnimation();
+        DeathMenu();
+
     }
 
-    void Score(){
-        scoreText.text =  score.ToString();
+    void Score()
+    {
+        scoreText.text = score.ToString();
     }
 
-    void ScoreAnimation(){
-        if(score > lastScore){
+    void ScoreAnimation()
+    {
+        if (score > lastScore)
+        {
             lastScore = score;
             scoreAnim.SetTrigger("ScoreUP");
-        }else if(score <= lastScore){
+        }
+        else if (score <= lastScore)
+        {
             scoreAnim.SetTrigger("ScoreIDLE");
         }
     }
 
-    void DeathMenu(){
-        if(PlayerController.playerDied == true){
-
+    void DeathMenu()
+    {
+        if (PlayerController.playerDied == true)
+        {
+            deathScreen.SetActive(true);
+            gameUI.SetActive(false);
+            Cursor.lockState = CursorLockMode.Confined;
+            Time.timeScale = 0f;
+            Debug.Log("é pra morrer");
+            deathOn = true;
         }
+    }
+
+    public void TryAgain()
+    {
+        SceneManager.LoadScene("Demo01");
+        Time.timeScale = 1f;
+        //Pause.isPaused = false;
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
