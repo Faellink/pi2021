@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float _jumpForce = 10f;
     public float playerHealth = 100f;
 
+    public static bool playerDied;
+
     Vector3 velocity;
     public Transform groundCheck;
     public float groundDistance = 0.5f;
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
     public Animator healthBarAnim;
     public RectTransform healthBar;
     public float hpX;
-    public float debugDamage;
+    public float debugDamage = 10f;
 
 
 
@@ -85,9 +87,14 @@ public class PlayerController : MonoBehaviour
                 cameraBobbing.isWalking = false;
             }
         }
-        DebugPause();
-        DebugCameraShake();
-        DebugHealthBar();
+        // DebugPause();
+        // DebugCameraShake();
+        // DebugHealthBar();
+        if(playerHealth <= 0 ){
+            playerDied = true;
+            Debug.Log("dead");
+        }
+
     }
 
     void PlayerMovement()
@@ -128,31 +135,31 @@ public class PlayerController : MonoBehaviour
         _characterController.Move(velocity * Time.deltaTime);
     }
 
-    void DebugPause()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Debug.Break();
-        }
-    }
+    // void DebugPause()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Q))
+    //     {
+    //         Debug.Break();
+    //     }
+    // }
 
-    void DebugCameraShake()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, cameraShakeFadeInTime, cameraShakeFadeOutTime);
-            posProcessingHitEffect.SetActive(true);
-        }
-    }
+    // void DebugCameraShake()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.T))
+    //     {
+    //         CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, cameraShakeFadeInTime, cameraShakeFadeOutTime);
+    //         posProcessingHitEffect.SetActive(true);
+    //     }
+    // }
 
-    void DebugHealthBar()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            hpX -= debugDamage;
-            healthBar.sizeDelta = new Vector2(hpX, 100);
-        }
-    }
+    // void DebugHealthBar()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.U))
+    //     {
+    //         hpX -= debugDamage;
+    //         healthBar.sizeDelta = new Vector2(hpX, 100);
+    //     }
+    // }
 
     void PlayerDamage()
     {

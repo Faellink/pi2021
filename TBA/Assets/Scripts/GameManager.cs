@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
 
     public GameObject scoreObject;
+
+    public GameObject deathScreen; 
 
     public TextMeshProUGUI scoreText;
 
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         Score();
         ScoreAnimation();
     }
@@ -45,6 +49,12 @@ public class GameManager : MonoBehaviour
             scoreAnim.SetTrigger("ScoreUP");
         }else if(score <= lastScore){
             scoreAnim.SetTrigger("ScoreIDLE");
+        }
+    }
+
+    void DeathMenu(){
+        if(PlayerController.playerDied == true){
+
         }
     }
 }

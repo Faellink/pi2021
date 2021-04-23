@@ -26,6 +26,7 @@ public class Pause : MonoBehaviour
             if (isPaused == true)
             {
                 Resume();
+                quitMenu.SetActive(false);
             }
             else
             {
