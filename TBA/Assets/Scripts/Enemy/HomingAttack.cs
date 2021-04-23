@@ -33,9 +33,9 @@ public class HomingAttack : MonoBehaviour
 
         if(wasHit == false){
             FollowTarget();
-            Debug.Log("normal");
+            //Debug.Log("normal");
         }else{
-            Debug.Log("inverse");
+            //Debug.Log("inverse");
             rigid.velocity = transform.forward * (speed *-1f);
         }
     }

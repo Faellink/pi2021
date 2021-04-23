@@ -20,6 +20,14 @@ public class GameManager : MonoBehaviour
 
     public static bool deathOn;
 
+    public static int  enemiesCounter;
+
+    public static bool canSpawnEnemies;
+
+    public int spanedEnemies;
+
+    public int numberofEnemies;
+
     public Animator scoreAnim;
 
     public static float score;
@@ -42,6 +50,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+        //numberofEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
         Score();
         foreach (TextMeshProUGUI menuScoreText in menuScore)
         {
@@ -49,12 +59,24 @@ public class GameManager : MonoBehaviour
         }
         ScoreAnimation();
         DeathMenu();
+        //spanedEnemies = numberofEnemies;
+        //Debug.Log(enemiesCounter);
 
+        spanedEnemies = enemiesCounter;
+        CanSpawn();
     }
 
     void Score()
     {
         scoreText.text = score.ToString();
+    }
+
+    void CanSpawn(){
+        if(enemiesCounter <= 100){
+            canSpawnEnemies = true;
+        }else if(enemiesCounter >100){
+            canSpawnEnemies = false;
+        }
     }
 
     void ScoreAnimation()
@@ -78,7 +100,7 @@ public class GameManager : MonoBehaviour
             gameUI.SetActive(false);
             Cursor.lockState = CursorLockMode.Confined;
             Time.timeScale = 0f;
-            Debug.Log("é pra morrer");
+            //Debug.Log("é pra morrer");
             deathOn = true;
         }
     }
@@ -89,6 +111,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         //Pause.isPaused = false;
     }
+
+    public void QuitToMainMenu(){
+        SceneManager.LoadScene("Menu");
+    }
+
     public void QuitGame()
     {
         Application.Quit();

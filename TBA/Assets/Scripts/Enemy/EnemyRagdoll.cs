@@ -34,8 +34,10 @@ public class EnemyRagdoll : MonoBehaviour
     {
         if (enemyHealth <= 0 && isDead == false)
         {
+            //GameManager.enemiesCounter--;
             isDead = true;
             GameManager.score += enemyScoreValue;
+            GameManager.enemiesCounter--;
             Die();
         }
 
@@ -48,6 +50,11 @@ public class EnemyRagdoll : MonoBehaviour
         animator.enabled = false;
         SetRigidBodyState(false);
         SetColliders(true);
+        Invoke("DestroyEnemy",5f);
+    }
+
+    void DestroyEnemy (){
+        Destroy(gameObject);
     }
 
     void SetRigidBodyState(bool state)

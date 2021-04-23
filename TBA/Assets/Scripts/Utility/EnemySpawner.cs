@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     {
         spawnTimer = Random.Range(1,10);
         spawnRepeatTimer = Random.Range(1,30);
+       
         InvokeRepeating("Spawn", spawnTimer, spawnRepeatTimer);
     }
 
@@ -24,7 +25,18 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    void Spawn(){
-        Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+    void Spawn()
+    {
+        if (GameManager.canSpawnEnemies == true)
+        {
+            //Debug.Log("pode parir");
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            GameManager.enemiesCounter++;
+        }
+        else
+        {
+            //Debug.Log("fecha as perna");
+        }
+
     }
 }

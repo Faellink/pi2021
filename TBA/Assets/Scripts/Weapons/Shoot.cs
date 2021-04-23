@@ -164,7 +164,7 @@ public class Shoot : MonoBehaviour
             Grenade enemyBallGrenade = raycastHit.transform.GetComponent<Grenade>();
             if (enemyBallGrenade != null)
             {
-                Debug.Log("acertou as bolas!");
+                //Debug.Log("acertou as bolas!");
                 enemyBallGrenade.shooted = true;
             }
 
@@ -289,7 +289,7 @@ public class Shoot : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("enemy hit");
+            //Debug.Log("enemy hit");
             EnemyRagdoll enemyMelee = other.gameObject.GetComponent<EnemyRagdoll>();
             enemyMelee.enemyHealth -= meleeDamage;
             enemyMelee.ShowDamage();
@@ -318,7 +318,7 @@ public class Shoot : MonoBehaviour
 
         if (other.gameObject.CompareTag("EnemyRangedAttack"))
         {
-            Debug.Log("ball hit");
+           // Debug.Log("ball hit");
             Rigidbody ballRigidbody = other.gameObject.GetComponent<Rigidbody>();
             HomingAttack enemyBall = other.gameObject.GetComponent<HomingAttack>();
             enemyBall.wasHit = true;

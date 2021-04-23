@@ -250,7 +250,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator RangedAttackCoroutine()
     {
         yield return new WaitForSeconds(2f);
-        Debug.Log("attacking");
+        //Debug.Log("attacking");
         if (rangedAttackAmmo < rangedAttackAmmoLimit)
         {
             Instantiate(rangedAttackPrefab, rangedAttackShooter.position, Quaternion.LookRotation(transform.forward, transform.up));

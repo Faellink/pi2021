@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         // DebugHealthBar();
         if(hpX <= 0 ){
             playerDied = true;
-            Debug.Log("dead");
+            //Debug.Log("dead");
         }
 
     }

@@ -59,7 +59,7 @@ public class Pause : MonoBehaviour
     }
     public void Resume()
     {
-        Debug.Log("resume");
+        //Debug.Log("resume");
         pauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
