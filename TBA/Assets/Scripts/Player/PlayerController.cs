@@ -91,7 +91,8 @@ public class PlayerController : MonoBehaviour
         // DebugPause();
         // DebugCameraShake();
         // DebugHealthBar();
-        if(hpX <= 0 ){
+        if (hpX <= 0)
+        {
             playerDied = true;
             //Debug.Log("dead");
         }
@@ -203,7 +204,8 @@ public class PlayerController : MonoBehaviour
             //CameraShaker.Instance.ShakeOnce(4f,4f,.1f,1f);
         }
 
-        if(other.gameObject.CompareTag("EnemyMeleeHit")){
+        if (other.gameObject.CompareTag("EnemyMeleeHit"))
+        {
             PlayerDamage();
         }
     }

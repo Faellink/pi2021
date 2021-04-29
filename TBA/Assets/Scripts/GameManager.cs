@@ -98,7 +98,8 @@ public class GameManager : MonoBehaviour
         {
             deathScreen.SetActive(true);
             gameUI.SetActive(false);
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             Time.timeScale = 0f;
             //Debug.Log("é pra morrer");
             deathOn = true;
