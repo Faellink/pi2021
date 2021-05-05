@@ -176,6 +176,8 @@ public class Shoot : MonoBehaviour
             //     raycastHit.rigidbody.AddForce(-raycastHit.normal * impactForce);
             // }
 
+            //Debug.Log(raycastHit.collider.gameObject.name);
+
         }
     }
 

@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
                 cameraBobbing.isWalking = false;
             }
         }
-        // DebugPause();
+        DebugPause();
         // DebugCameraShake();
         // DebugHealthBar();
         if (hpX <= 0)
@@ -137,13 +137,13 @@ public class PlayerController : MonoBehaviour
         _characterController.Move(velocity * Time.deltaTime);
     }
 
-    // void DebugPause()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Q))
-    //     {
-    //         Debug.Break();
-    //     }
-    // }
+    void DebugPause()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Break();
+        }
+    }
 
     // void DebugCameraShake()
     // {

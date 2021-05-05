@@ -800,6 +800,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9be36ece3b712db448a49d91d6f610b4,
         type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9be36ece3b712db448a49d91d6f610b4,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1449,7 +1454,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6b52abce7aec4e442959fa461469d6d1,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6b52abce7aec4e442959fa461469d6d1,
         type: 3}
@@ -1459,7 +1464,7 @@ PrefabInstance:
     - target: {fileID: 1686695857016236298, guid: 6b52abce7aec4e442959fa461469d6d1,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b52abce7aec4e442959fa461469d6d1, type: 3}
@@ -2872,7 +2877,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3582,7 +3587,7 @@ GameObject:
   - component: {fileID: 314649999}
   - component: {fileID: 314650000}
   - component: {fileID: 314650001}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FPS Player
   m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -9544,12 +9549,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5d43611adeaee3847841c3d5e3c54674,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7882312389892913117, guid: 5d43611adeaee3847841c3d5e3c54674,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d43611adeaee3847841c3d5e3c54674, type: 3}
@@ -12750,7 +12755,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3351
+    m_Bits: 3347
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -13985,7 +13990,7 @@ PrefabInstance:
     - target: {fileID: -3106574396819433938, guid: f579e41fad7d7ff4cad78d2e81b2bceb,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f579e41fad7d7ff4cad78d2e81b2bceb,
         type: 3}
@@ -13995,7 +14000,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f579e41fad7d7ff4cad78d2e81b2bceb,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2985553390514315587, guid: f579e41fad7d7ff4cad78d2e81b2bceb,
         type: 3}
@@ -15012,7 +15017,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1216154893}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Helmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16419,7 +16424,7 @@ GameObject:
   - component: {fileID: 1322821214}
   - component: {fileID: 1322821213}
   - component: {fileID: 1322821212}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
