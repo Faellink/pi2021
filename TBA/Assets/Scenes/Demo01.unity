@@ -19191,6 +19191,7 @@ MonoBehaviour:
   cooldown: 0
   isOverheated: 0
   overheatTime: 0
+  ohTimer: 0
   hearBar: {fileID: 0}
   cooldownSpeed: 0
 --- !u!1 &1601583771
@@ -20056,7 +20057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1697518025
 Transform:
   m_ObjectHideFlags: 0
@@ -20449,7 +20450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1734106151
 Transform:
   m_ObjectHideFlags: 0
@@ -23056,7 +23057,8 @@ MonoBehaviour:
   heatValue: 15
   cooldown: 8
   isOverheated: 0
-  overheatTime: 0
+  overheatTime: 5
+  ohTimer: 0
   hearBar: {fileID: 1197051856}
   cooldownSpeed: 30
 --- !u!1001 &2160119645344712221

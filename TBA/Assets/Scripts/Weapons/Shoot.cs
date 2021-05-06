@@ -18,6 +18,7 @@ public class Shoot : MonoBehaviour
 
     public float meleeDamage = 50f;
     public float meleeForce;
+    public bool isMelee;
 
 
     public float explosionForce = 500f;
@@ -45,15 +46,13 @@ public class Shoot : MonoBehaviour
     public float heatValue;
     public float cooldown;
     float originalCooldown;
+
     public bool isOverheated;
     public float overheatTime;
+    public float ohTimer;
 
     public Image hearBar;
     public float cooldownSpeed;
-
-    public Coroutine overheatCoroutine;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -69,15 +68,39 @@ public class Shoot : MonoBehaviour
     void Update()
     {
 
+        if (isOverheated == true)
+        {
+            muzzleFlash.Stop();
+            isShooting = false;
+            return;
+        }
+
+        if (canShoot == false)
+        {
+            return;
+        }
 
         if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextTimeToFire)
         {
-            nextTimeToFire = Time.time + 1f / fireRate;
-            ShootWeapon();
-            isShooting = true;
-            muzzleFlash.Play();
+            
 
+            if (isOverheated == false)
+            {
+                nextTimeToFire = Time.time + 1f / fireRate;
+                ShootWeapon();
+                isShooting = true;
+                muzzleFlash.Play();
+            }
+            
         }
+
+        //if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextTimeToFire)
+        //{
+        //    nextTimeToFire = Time.time + 1f / fireRate;
+        //    ShootWeapon();
+        //    isShooting = true;
+        //    muzzleFlash.Play();
+        //}
 
 
 
@@ -87,6 +110,22 @@ public class Shoot : MonoBehaviour
             isShooting = false;
         }
 
+        //WeaponMelee();
+
+        //WeaponAnimation();
+
+        //CrosshairAnim();
+
+        //Cooldown();
+
+        //Overheat();
+
+        //HeatBarAnim();
+
+    }
+
+    private void LateUpdate()
+    {
         WeaponMelee();
 
         WeaponAnimation();
@@ -95,8 +134,9 @@ public class Shoot : MonoBehaviour
 
         Cooldown();
 
-        HeatBarAnim();
+        Overheat();
 
+        HeatBarAnim();
     }
 
     void ShootWeapon()
@@ -104,9 +144,9 @@ public class Shoot : MonoBehaviour
 
         //InstantiateBullet();
 
-
-
         RaycastHit raycastHit;
+
+
         if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out raycastHit, range))
         {
             explosionCenter = raycastHit.point;
@@ -178,7 +218,10 @@ public class Shoot : MonoBehaviour
 
             //Debug.Log(raycastHit.collider.gameObject.name);
 
+
         }
+
+
     }
 
     // void InstantiateBullet()
@@ -192,6 +235,7 @@ public class Shoot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             weaponAnim.Play("Melee");
+
         }
 
     }
@@ -208,6 +252,7 @@ public class Shoot : MonoBehaviour
         {
             canShoot = true;
         }
+
         weaponAnim.SetBool("isShooting", isShooting);
 
     }
@@ -227,41 +272,77 @@ public class Shoot : MonoBehaviour
 
         heat = Mathf.Clamp(heat, heatMin, heatMax);
 
-        if (heat >= heatMax - heatValue)
+        if (heat >= heatMax)
         {
-
+            isOverheated = true;
+        }
+        else
+        {
+            isOverheated = false;
         }
 
         hearBar.fillAmount = heat / heatMax;
 
+        if (isOverheated == false)
+        {
+
+        }
+
         //Debug.Log(hearBar.fillAmount);
+    }
+
+    void Overheat()
+    {
+        if (isOverheated == true)
+        {
+            ohTimer += Time.deltaTime;
+            cooldown = 0f;
+
+            if (ohTimer >= overheatTime)
+            {
+                cooldown = originalCooldown;
+                isOverheated = false;
+                ohTimer = 0f;
+            }
+
+        }
+    }
+
+    IEnumerator Cooling()
+    {
+        yield return new WaitForSecondsRealtime(overheatTime);
+        cooldown = originalCooldown;
+        isOverheated = false;
     }
 
     void HeatBarAnim()
     {
         if (hearBar.fillAmount > 0.6f)
         {
-            heatBarAnim.SetBool("Heating",true);
+            heatBarAnim.SetBool("Heating", true);
             heatBarAnim.SetBool("Normal", false);
             heatBarAnim.SetBool("Overheat", false);
-            heatBarAnim.SetBool("Danger",false);
+            heatBarAnim.SetBool("Danger", false);
         }
-        if(hearBar.fillAmount > 0.8f){
-            heatBarAnim.SetBool("Danger",true);
-            heatBarAnim.SetBool("Heating",false);
+        if (hearBar.fillAmount > 0.8f)
+        {
+            heatBarAnim.SetBool("Danger", true);
+            heatBarAnim.SetBool("Heating", false);
             heatBarAnim.SetBool("Overheat", false);
             //heatBarAnim.SetBool("");
         }
-        if(hearBar.fillAmount >= 1f){
+        if (hearBar.fillAmount >= 1f)
+        {
             heatBarAnim.SetBool("Overheat", true);
-            heatBarAnim.SetBool("Danger",false);
-            heatBarAnim.SetBool("Heating",false);
+            heatBarAnim.SetBool("Danger", false);
+            heatBarAnim.SetBool("Heating", false);
         }
-        if(hearBar.fillAmount <= 0.6){
+        if (hearBar.fillAmount <= 0.6)
+        {
             heatBarAnim.SetBool("Normal", true);
             heatBarAnim.SetBool("Overheat", false);
         }
-        
+
     }
 
     void CrosshairAnim()
@@ -275,7 +356,7 @@ public class Shoot : MonoBehaviour
             crosshair.SetBool("isShooting", false);
         }
     }
-    
+
 
     void OnDrawGizmos()
     {
@@ -284,7 +365,7 @@ public class Shoot : MonoBehaviour
     }
 
 
-    
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -320,7 +401,7 @@ public class Shoot : MonoBehaviour
 
         if (other.gameObject.CompareTag("EnemyRangedAttack"))
         {
-           // Debug.Log("ball hit");
+            // Debug.Log("ball hit");
             Rigidbody ballRigidbody = other.gameObject.GetComponent<Rigidbody>();
             HomingAttack enemyBall = other.gameObject.GetComponent<HomingAttack>();
             enemyBall.wasHit = true;
