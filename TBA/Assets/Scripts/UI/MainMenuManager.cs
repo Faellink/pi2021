@@ -40,10 +40,16 @@ public class MainMenuManager : MonoBehaviour
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
         //loadingProgress.SetActive(true)
+        asyncOperation.allowSceneActivation = false;
+        
         while (!asyncOperation.isDone)
         {
             float progress = Mathf.Clamp01(asyncOperation.progress / .9f);
             loadingProgress.fillAmount = progress;
+            if (asyncOperation.progress >= .9f)
+            {
+                asyncOperation.allowSceneActivation = true;
+            }
             yield return null;
         }
     }

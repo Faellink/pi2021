@@ -10,7 +10,7 @@ public class Pause : MonoBehaviour
     public GameObject quitMenu;
 
     public GameObject gameUI;
-    public static bool isPaused;
+    public bool isPaused;
     
     public bool testeTeste;
 

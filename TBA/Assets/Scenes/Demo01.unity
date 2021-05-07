@@ -3627,7 +3627,6 @@ Transform:
   - {fileID: 1472509075}
   - {fileID: 207401429}
   - {fileID: 1188622672}
-  - {fileID: 678559552}
   - {fileID: 1167944925}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -3653,6 +3652,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  onAir: 0
   cameraBobbing: {fileID: 0}
   posProcessingHitEffect: {fileID: 1854911313}
   postProcessingTimer: 0.5
@@ -3664,6 +3664,7 @@ MonoBehaviour:
   healthBar: {fileID: 1909777625}
   hpX: 796
   debugDamage: 100
+  pause: {fileID: 1601583772}
 --- !u!208 &314650000
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -11206,15 +11207,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678559551}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.3, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 226591123}
   - {fileID: 1583846969}
   - {fileID: 1035063137}
-  m_Father: {fileID: 314649998}
-  m_RootOrder: 4
+  m_Father: {fileID: 963194228}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &678559553
 MonoBehaviour:
@@ -11223,7 +11224,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678559551}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1924dc23a5f32c947bf6c9380ff08dd7, type: 3}
   m_Name: 
@@ -12777,7 +12778,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 678559552}
   m_Father: {fileID: 1472509075}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12793,7 +12795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1924dc23a5f32c947bf6c9380ff08dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 300
+  mouseSensitivity: 100
   playerTranform: {fileID: 314649998}
 --- !u!114 &963194230
 MonoBehaviour:
@@ -12839,13 +12841,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2dd7a79d25862045a0dfa1110a2115a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headTransform: {fileID: 963194228}
+  headTransform: {fileID: 1472509075}
   cameraTransform: {fileID: 963194228}
   bobFrequency: 7
   bobHorizontalAmplitude: 0.02
-  bobVerticalAmplitude: 0.1
+  bobVerticalAmplitude: 1.8
   headBobSmoothing: 0.02
   isWalking: 0
+  pause: {fileID: 1601583772}
 --- !u!1 &968470291
 GameObject:
   m_ObjectHideFlags: 0
@@ -14493,7 +14496,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 314649998}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1172510621
 GameObject:
@@ -19171,6 +19174,7 @@ MonoBehaviour:
   canShoot: 0
   meleeDamage: 50
   meleeForce: 0
+  isMelee: 0
   explosionForce: 1000
   explosionRadius: 2
   fpsCamera: {fileID: 0}
@@ -19227,6 +19231,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 1314910426}
   quitMenu: {fileID: 1626305630}
   gameUI: {fileID: 779741974}
+  isPaused: 0
+  testeTeste: 0
 --- !u!4 &1601583773
 Transform:
   m_ObjectHideFlags: 0
@@ -19517,7 +19523,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1647193640}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1601583774}
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1647193640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23038,6 +23055,7 @@ MonoBehaviour:
   canShoot: 0
   meleeDamage: 50
   meleeForce: 2000
+  isMelee: 0
   explosionForce: 1000
   explosionRadius: 2
   fpsCamera: {fileID: 963194227}
@@ -23311,6 +23329,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8634838745904619145, guid: 2b776dd5c8e7d3f4fb3ec3d18af75334,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8634838747471581114, guid: 2b776dd5c8e7d3f4fb3ec3d18af75334,
         type: 3}
       propertyPath: m_Name

@@ -20,6 +20,8 @@ public class CameraBobbing : MonoBehaviour
     private float walkingTime;
     private Vector3 targetCameraPosition;
 
+    public Pause pause;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,7 @@ public class CameraBobbing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(!isWalking){
             walkingTime = 0f;
         }else{
@@ -40,7 +43,6 @@ public class CameraBobbing : MonoBehaviour
         cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetCameraPosition, headBobSmoothing);
         if((cameraTransform.position - targetCameraPosition).magnitude <= 0.001) cameraTransform.position = targetCameraPosition;
 
-        
     }
 
     private Vector3 CalculateHeadBobOffset(float t){

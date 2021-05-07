@@ -49,8 +49,7 @@ public class PlayerController : MonoBehaviour
     public float hpX;
     public float debugDamage = 10f;
 
-
-
+    public Pause pause;
 
     // Start is called before the first frame update
     void Start()
@@ -70,32 +69,70 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMovement();
-        //
-        var dist = Vector3.Distance(transform.position, lastPos);
-        lastPos = transform.position;
-        if (Time.deltaTime > 0)
-        { // avoid errors when game paused
-            var speed = dist / Time.deltaTime; // calculate speed
-            if (speed > 0.1f)
-            {
-                //Debug.Log("walking");
-                cameraBobbing.isWalking = true;
-            }
-            else
-            {
-                //Debug.Log("stop");
-                cameraBobbing.isWalking = false;
-            }
-        }
-        DebugPause();
-        // DebugCameraShake();
-        // DebugHealthBar();
-        if (hpX <= 0)
+
+
+        if (pause.isPaused == false)
         {
-            playerDied = true;
-            //Debug.Log("dead");
+
+            _gravity = -50f;
+                
+            PlayerMovement();
+            
+            var dist = Vector3.Distance(transform.position, lastPos);
+            lastPos = transform.position;
+            if (Time.deltaTime > 0)
+            { // avoid errors when game paused
+                var speed = dist / Time.deltaTime; // calculate speed
+                if (speed > 0.1f)
+                {
+                    //Debug.Log("walking");
+                    cameraBobbing.isWalking = true;
+                }
+                else
+                {
+                    //Debug.Log("stop");
+                    cameraBobbing.isWalking = false;
+                }
+            }
+            DebugPause();
+            // DebugCameraShake();
+            // DebugHealthBar();
+            if (hpX <= 0)
+            {
+                playerDied = true;
+                //Debug.Log("dead");
+            }
         }
+        else
+        {
+            _gravity = 0f;
+        }
+        
+        //
+        // var dist = Vector3.Distance(transform.position, lastPos);
+        // lastPos = transform.position;
+        // if (Time.deltaTime > 0)
+        // { // avoid errors when game paused
+        //     var speed = dist / Time.deltaTime; // calculate speed
+        //     if (speed > 0.1f)
+        //     {
+        //         //Debug.Log("walking");
+        //         cameraBobbing.isWalking = true;
+        //     }
+        //     else
+        //     {
+        //         //Debug.Log("stop");
+        //         cameraBobbing.isWalking = false;
+        //     }
+        // }
+        // DebugPause();
+        // // DebugCameraShake();
+        // // DebugHealthBar();
+        // if (hpX <= 0)
+        // {
+        //     playerDied = true;
+        //     //Debug.Log("dead");
+        // }
 
     }
 
