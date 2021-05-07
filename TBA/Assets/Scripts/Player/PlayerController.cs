@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastPos = Vector3.zero;
 
     bool isGrounded;
-    bool onAir = false;
+    [SerializeField] bool onAir = false;
 
     public CameraBobbing cameraBobbing;
     public GameObject posProcessingHitEffect;
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 direction = transform.right * moveX + transform.forward * moveZ;
 
-        _characterController.Move(direction * _speed * Time.deltaTime);
+        _characterController.Move(direction * (_speed * Time.deltaTime));
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {

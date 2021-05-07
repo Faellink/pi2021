@@ -11,6 +11,8 @@ public class Pause : MonoBehaviour
 
     public GameObject gameUI;
     public static bool isPaused;
+    
+    public bool testeTeste;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +74,8 @@ public class Pause : MonoBehaviour
     {
 
     }
+    
+    
 
 
 
