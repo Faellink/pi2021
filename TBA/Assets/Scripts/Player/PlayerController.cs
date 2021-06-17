@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     AudioSource playerAudio;
     public AudioClip playerHit;
     public AudioClip playerDead;
+    public GameObject levelMusic;
     
 
     public static bool playerDied;
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
             if (hpX <= 0)
             {
                 playerDied = true;
+                levelMusic.SetActive(false);
                 playerAudio.PlayOneShot(playerDead, .5f);
                 //Debug.Log("dead");
             }

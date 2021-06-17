@@ -60,7 +60,7 @@ public class EnemyController : MonoBehaviour
         skin = GetComponentInChildren<SkinnedMeshRenderer>();
         if (skin==null)
         {
-            Debug.Log("nope");
+            //Debug.Log("nope");
         }
         randomMaterial = Random.Range(0,2);
         if (randomMaterial == 0)
@@ -155,7 +155,7 @@ public class EnemyController : MonoBehaviour
 
                 if (navAgentAnim.GetBool("isMelee"))
                 {
-                    Debug.Log("meleedadac");
+                    //Debug.Log("meleedadac");
                     navMeshAgent.isStopped = true;
                 
                 }
