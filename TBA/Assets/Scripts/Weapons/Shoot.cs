@@ -19,6 +19,7 @@ public class Shoot : MonoBehaviour
     public float meleeDamage = 50f;
     public float meleeForce;
     public bool isMelee;
+   
 
 
     public float explosionForce = 500f;
@@ -54,9 +55,15 @@ public class Shoot : MonoBehaviour
     public Image hearBar;
     public float cooldownSpeed;
 
+    private AudioSource blasterAudio;
+    public float blasterPitch;
+    public float blasterPitchMin = 1;
+    public float blasterPitchMax = 1;
+
     // Start is called before the first frame update
     void Start()
     {
+        blasterAudio = GetComponent<AudioSource>();
         fpsCamera = Camera.main;
         weaponAnim = GetComponent<Animator>();
         weaponAnim.SetBool("isMelee", false);
@@ -90,6 +97,9 @@ public class Shoot : MonoBehaviour
                 ShootWeapon();
                 isShooting = true;
                 muzzleFlash.Play();
+                blasterPitch = Random.Range(blasterPitchMin,blasterPitchMax);
+                blasterAudio.pitch = blasterPitch;
+                blasterAudio.Play();
             }
             
         }

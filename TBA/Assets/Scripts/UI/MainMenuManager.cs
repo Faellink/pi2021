@@ -10,11 +10,13 @@ public class MainMenuManager : MonoBehaviour
     public GameObject mainMenu;
 
     public Image loadingProgress;
+    
+    private AudioSource menuAudioClip;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        menuAudioClip = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,11 @@ public class MainMenuManager : MonoBehaviour
 
     public void QuitGame(){
         Application.Quit();
+    }
+    
+    public void PlayAudio()
+    {
+        menuAudioClip.Play();
     }
 
     public void LoadLevel(int sceneIndex)

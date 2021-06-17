@@ -15,6 +15,9 @@ public class EnemyController : MonoBehaviour
 
     public int meleeHits;
     public int meleeLimit = 1;
+    public int randomMelee;
+
+    
 
     bool canShoot;
     public bool canMelee;
@@ -28,6 +31,13 @@ public class EnemyController : MonoBehaviour
     EnemyRagdoll enemyRagdoll;
 
     Animator navAgentAnim;
+
+
+    public SkinnedMeshRenderer skin;
+    public Material zombieMaterial;
+    public Material zombieMatA;
+    public Material zombieMatB;
+    public int randomMaterial;
 
     public GameObject rangedAttackPrefab;
 
@@ -47,6 +57,22 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        skin = GetComponentInChildren<SkinnedMeshRenderer>();
+        if (skin==null)
+        {
+            Debug.Log("nope");
+        }
+        randomMaterial = Random.Range(0,2);
+        if (randomMaterial == 0)
+        {
+            //zombieMaterial = zombieMatA;
+            skin.material = zombieMatA;
+        }
+        else
+        {
+            //zombieMaterial = zombieMatB;
+            skin.material = zombieMatB;
+        }
         playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
         navAgentAnim = GetComponent<Animator>();
@@ -93,10 +119,11 @@ public class EnemyController : MonoBehaviour
 
                 if (distance < rangedAttackRange && canShoot == true)
                 {
+                    navAgentAnim.SetBool("isRange",true);
                     navMeshAgent.isStopped = true;
                     rangedAttackAmmo = 0;
                     //RangedAttack();
-                    Invoke("RangedAttack", 1f);
+                    //Invoke("RangedAttack", 1f);
                 }
 
             }
@@ -113,12 +140,28 @@ public class EnemyController : MonoBehaviour
                 {
                     navMeshAgent.isStopped = true;
                     meleeHits = 0;
-                    Invoke("MeleeAttack", 1f);
+                    Invoke("MeleeAttack", 0.5f);
                 }
 
-                if (navAgentAnim.GetCurrentAnimatorStateInfo(0).IsName("EnemyMelee"))
+                // if (navAgentAnim.GetCurrentAnimatorStateInfo(0).IsName("Kick") || navAgentAnim.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
+                // {
+                //     navAgentAnim.SetBool("isMelee", false);
+                //     navMeshAgent.isStopped = true;
+                // }
+                // else
+                // {
+                //     navMeshAgent.isStopped = false;
+                // }
+
+                if (navAgentAnim.GetBool("isMelee"))
                 {
-                    navAgentAnim.SetBool("isMelee", false);
+                    Debug.Log("meleedadac");
+                    navMeshAgent.isStopped = true;
+                
+                }
+                else
+                {
+                    navMeshAgent.isStopped = false;
                 }
             }
         }
@@ -208,6 +251,9 @@ public class EnemyController : MonoBehaviour
 
     void MeleeAttack()
     {
+        randomMelee = Random.Range(0, 2);
+        
+        navAgentAnim.SetInteger("MeleeType",randomMelee);
         if (meleeHits < meleeLimit)
         {
             //Instantiate(rangedAttackPrefab,rangedAttackShooter.position, Quaternion.LookRotation(transform.forward, transform.up));
@@ -225,6 +271,7 @@ public class EnemyController : MonoBehaviour
 
     void RangedAttack()
     {
+        
         //throw energy ball
         //navMeshAgent.isStopped = true;
         //navMeshAgent.velocity = Vector3.zero;
@@ -234,9 +281,24 @@ public class EnemyController : MonoBehaviour
         {
             Instantiate(rangedAttackPrefab, rangedAttackShooter.position, Quaternion.LookRotation(transform.forward, transform.up));
             rangedAttackAmmo++;
-            navMeshAgent.isStopped = false;
+            // navMeshAgent.isStopped = false;
+            navMeshAgent.isStopped = navAgentAnim.GetCurrentAnimatorStateInfo(0).IsName("Attack Anim");
         }
         canShoot = false;
+    }
+
+    void Walk()
+    {
+        navMeshAgent.isStopped = false;
+        navAgentAnim.SetBool("isWalking", true);
+        navAgentAnim.SetBool("isRange", false);
+        
+    }
+
+    public void OffMelee()
+    {
+        navAgentAnim.SetBool("isMelee", false);
+        Debug.Log("off melee");
     }
 
     void OnDrawGizmos()

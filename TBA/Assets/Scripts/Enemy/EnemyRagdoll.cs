@@ -11,6 +11,18 @@ public class EnemyRagdoll : MonoBehaviour
     public Animator animator;
     public float enemyHealth = 100f;
 
+    AudioSource enemyAudio;
+    public AudioClip enemyHit;
+    public AudioClip enemyDead01;
+    public AudioClip enemyDead02;
+    int enemyAudioDeadRandom;
+    float enemyAudioPitch;
+    public float enemyAudioPitchMin;
+    public float enemyAudioPitchMax;
+    
+    public GameObject meleeCollider;
+    
+
     public float enemyScoreValue = 100f;
 
     bool isDead;
@@ -21,6 +33,7 @@ public class EnemyRagdoll : MonoBehaviour
 
     void Start()
     {
+        enemyAudio = GetComponent<AudioSource>();
         isDead = false;
         mainRigidbody = GetComponent<Rigidbody>();
         mainCollider = GetComponent<Collider>();
@@ -46,6 +59,18 @@ public class EnemyRagdoll : MonoBehaviour
 
     public void Die()
     {
+        meleeCollider.SetActive(false);
+        enemyAudioDeadRandom = Random.Range(0, 2);
+        enemyAudioPitch = Random.Range(enemyAudioPitchMin, enemyAudioPitchMax);
+        enemyAudio.pitch = enemyAudioPitch;
+        if (enemyAudioDeadRandom == 0)
+        {
+            enemyAudio.PlayOneShot(enemyDead01);
+        }
+        else
+        {
+            enemyAudio.PlayOneShot(enemyDead02);
+        }
         //Destroy(gameObject, 10f);
         animator.enabled = false;
         SetRigidBodyState(false);
@@ -79,6 +104,9 @@ public class EnemyRagdoll : MonoBehaviour
 
     public void ShowDamage()
     {
+        enemyAudioPitch = Random.Range(enemyAudioPitchMin, enemyAudioPitchMax);
+        enemyAudio.pitch = enemyAudioPitch;
+        enemyAudio.PlayOneShot(enemyHit);
         Instantiate(floatingDamageText, transform.position, Quaternion.identity, transform);
     }
 }

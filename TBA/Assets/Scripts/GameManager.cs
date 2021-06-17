@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameUI;
 
+    private AudioSource menuAudioClip;
+
     public static bool deathOn;
 
     public static int  enemiesCounter;
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        menuAudioClip = GetComponent<AudioSource>();
         scoreObject = GameObject.FindGameObjectWithTag("Score");
         scoreText = scoreObject.GetComponent<TextMeshProUGUI>();
         scoreAnim = scoreObject.GetComponent<Animator>();
@@ -120,5 +123,10 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void PlayAudioMenu()
+    {
+        menuAudioClip.Play();
     }
 }

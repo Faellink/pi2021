@@ -15,6 +15,11 @@ public class PlayerController : MonoBehaviour
     public float _jumpForce = 10f;
     public float playerHealth = 100f;
 
+    AudioSource playerAudio;
+    public AudioClip playerHit;
+    public AudioClip playerDead;
+    
+
     public static bool playerDied;
 
     Vector3 velocity;
@@ -54,6 +59,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerAudio = GetComponent<AudioSource>();
         _characterController = GetComponent<CharacterController>();
         _airSpeed = _speed / 2f;
         cameraBobbing = GetComponentInChildren<CameraBobbing>();
@@ -100,6 +106,7 @@ public class PlayerController : MonoBehaviour
             if (hpX <= 0)
             {
                 playerDied = true;
+                playerAudio.PlayOneShot(playerDead, .5f);
                 //Debug.Log("dead");
             }
         }
@@ -208,6 +215,7 @@ public class PlayerController : MonoBehaviour
         healthBar.sizeDelta = new Vector2(hpX, 100);
 
         playerHealth -= debugDamage;
+        playerAudio.PlayOneShot(playerHit);
 
         CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, cameraShakeFadeInTime, cameraShakeFadeOutTime);
 
@@ -245,6 +253,8 @@ public class PlayerController : MonoBehaviour
         {
             PlayerDamage();
         }
+        
+        //Debug.Log(other.gameObject.name);
     }
 
 }
